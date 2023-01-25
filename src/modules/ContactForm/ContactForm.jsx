@@ -1,6 +1,6 @@
-// import { Component } from 'react';
+import { Component } from 'react';
 // import PropTypes from 'prop-types';
-import { Formik, Field} from 'formik';
+import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 
 import inititalState from './initialState';
@@ -13,38 +13,37 @@ const validationSchema = Yup.object({
   number: Yup.number().required(),
 });
 
-const ContactForm = ({contacts}) => {
-  const handleSubmit = (values, {resetForm, setValues}) => {
-    console.dir(values);
-    setValues(values)
+class ContactForm extends Component {
+  state = { name: '', number: '' };
+
+  handleSubmit = ({ name, number }, { resetForm }) => {
+    this.setState({ name, number });
     resetForm();
   };
 
-  return (
-    <Formik
-      initialValues={inititalState}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <StyledContactForm>
-        <div>
-          <StyledLabel>Name</StyledLabel>
-          <Field
-            type='text' name="name"
-          />
-        </div>
-        <div>
-          <StyledLabel>Number</StyledLabel>
-          <Field
-            type='number' name="number"
-          />
-        </div>
+  render() {
+    return (
+      <Formik
+        initialValues={inititalState}
+        validationSchema={validationSchema}
+        onSubmit={this.handleSubmit}
+      >
+        <StyledContactForm>
+          <div>
+            <StyledLabel>Name</StyledLabel>
+            <Field type="text" name="name" />
+          </div>
+          <div>
+            <StyledLabel>Number</StyledLabel>
+            <Field type="number" name="number" />
+          </div>
 
-        <StyledBtn type="submit">Add contact</StyledBtn>
-      </StyledContactForm>
-    </Formik>
-  );
-};
+          <StyledBtn type="submit">Add contact</StyledBtn>
+        </StyledContactForm>
+      </Formik>
+    );
+  }
+}
 
 export default ContactForm;
 
