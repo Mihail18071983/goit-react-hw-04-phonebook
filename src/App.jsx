@@ -71,7 +71,7 @@ export class App extends Component {
     return (
       <>
         <StyledBookTitle>Phonebook</StyledBookTitle>
-        <ContactForm contacts={contacts} />
+        <ContactForm />
         <ContactContainer>
           <ContactTitle>Contacts</ContactTitle>
           <Filter value={filter} onChange={this.changeFilter} />
