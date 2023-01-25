@@ -18,6 +18,7 @@ class ContactForm extends Component {
 
   handleSubmit = ({ name, number }, { resetForm }) => {
     this.setState({ name, number });
+    const result = onSubmit({ ...this.state });
     resetForm();
   };
 
