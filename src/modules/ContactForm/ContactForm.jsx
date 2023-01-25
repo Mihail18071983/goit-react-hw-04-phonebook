@@ -8,13 +8,15 @@ import StyledBtn from 'shared/components/Button/Button.styled';
 import StyledContactForm from './ContactForm.styled';
 import StyledLabel from './label.styled';
 
-const validationSchema = Yup.object({
-  name: Yup.string().required(),
-  number: Yup.number().required(),
-});
+
 
 class ContactForm extends Component {
   state = { name: '', number: '' };
+
+  validationSchema = Yup.object({
+  name: Yup.string().required(),
+  number: Yup.number().required(),
+});
 
   handleSubmit = ({ name, number }, { resetForm }) => {
     this.setState({ name, number });
@@ -27,7 +29,7 @@ class ContactForm extends Component {
     return (
       <Formik
         initialValues={inititalState}
-        validationSchema={validationSchema}
+        validationSchema={this.validationSchema}
         onSubmit={this.handleSubmit}
       >
         <StyledContactForm>
