@@ -1,38 +1,40 @@
-import { Component } from 'react';
+// import { Component } from 'react';
 // import PropTypes from 'prop-types';
-import { Formik, Field } from 'formik';
+import { Formik, Form, Field, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import inititalState from './initialState';
 import StyledBtn from 'shared/components/Button/Button.styled';
-import StyledContactForm from './ContactForm.styled';
+// import StyledContactForm from './ContactForm.styled';
 import StyledLabel from './label.styled';
+import { object } from 'prop-types';
 
 
-
-class ContactForm extends Component {
-  state = { name: '', number: '' };
-
-  validationSchema = Yup.object({
+const validationSchema = Yup.object({
   name: Yup.string().required(),
   number: Yup.number().required(),
 });
 
-  handleSubmit = ({ name, number }, { resetForm }) => {
-    this.setState({ name, number });
-    console.log(this.props)
-    this.props.onChange({ ...this.state });
+const ContactForm = () => {
+  const handleSubmit = ({ name, number }, { resetForm }) => {
+    console.log(name, number);
     resetForm();
   };
 
-  render() {
-    return (
-      <Formik
-        initialValues={inititalState}
-        validationSchema={this.validationSchema}
-        onSubmit={this.handleSubmit}
-      >
-        <StyledContactForm>
+  //  const handleChange = e => {
+  //   const { name, value } = e.currentTarget;
+  //    console.log({ [name]: value });
+     
+  // };
+
+  return (
+    <Formik
+      initialValues={inititalState}
+      onSubmit={handleSubmit}
+      validationSchema={validationSchema}
+    >
+      {
+        <Form>
           <div>
             <StyledLabel>Name</StyledLabel>
             <Field type="text" name="name" />
@@ -43,11 +45,11 @@ class ContactForm extends Component {
           </div>
 
           <StyledBtn type="submit">Add contact</StyledBtn>
-        </StyledContactForm>
-      </Formik>
-    );
-  }
-}
+        </Form>
+      }
+    </Formik>
+  );
+};
 
 export default ContactForm;
 
