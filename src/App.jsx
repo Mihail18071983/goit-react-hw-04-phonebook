@@ -15,6 +15,20 @@ export class App extends Component {
     filter: '',
   };
 
+   componentDidMount() {
+        const contacts = JSON.parse(localStorage.getItem("contacts"));
+        if(contacts?.length) {
+            this.setState({contacts})
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        const {contacts} = this.state;
+        if(prevState.contacts.length !== contacts.length) {
+            localStorage.setItem("contacts", JSON.stringify(contacts));
+        }
+    }
+
   formSubmitHandler = ({ name, number }) => {
     const nanoid = customAlphabet('1234567890', 2);
     const id = 'id-' + nanoid(2);
@@ -87,3 +101,5 @@ export class App extends Component {
     );
   }
 }
+
+
