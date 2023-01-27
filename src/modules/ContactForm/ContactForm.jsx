@@ -1,31 +1,27 @@
-// import { Component } from 'react';
-// import PropTypes from 'prop-types';
-import { Formik, Form, Field, FormikProps } from 'formik';
+import PropTypes from 'prop-types';
+import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 
 import inititalState from './initialState';
 import StyledBtn from 'shared/components/Button/Button.styled';
-// import StyledContactForm from './ContactForm.styled';
+import StyledContactForm from './ContactForm.styled';
 import StyledLabel from './label.styled';
-import { object } from 'prop-types';
-
+// import { object } from 'prop-types';
 
 const validationSchema = Yup.object({
   name: Yup.string().required(),
   number: Yup.number().required(),
 });
 
-const ContactForm = () => {
+const ContactForm = ({ formSubmitHandler }) => {
   const handleSubmit = ({ name, number }, { resetForm }) => {
+    const  submitHandler= formSubmitHandler({ name, number });
     console.log(name, number);
-    resetForm();
+    if (submitHandler) {
+      resetForm();
+    }
+    
   };
-
-  //  const handleChange = e => {
-  //   const { name, value } = e.currentTarget;
-  //    console.log({ [name]: value });
-     
-  // };
 
   return (
     <Formik
@@ -34,7 +30,7 @@ const ContactForm = () => {
       validationSchema={validationSchema}
     >
       {
-        <Form>
+        <StyledContactForm>
           <div>
             <StyledLabel>Name</StyledLabel>
             <Field type="text" name="name" />
@@ -45,7 +41,7 @@ const ContactForm = () => {
           </div>
 
           <StyledBtn type="submit">Add contact</StyledBtn>
-        </Form>
+        </StyledContactForm>
       }
     </Formik>
   );
@@ -53,6 +49,6 @@ const ContactForm = () => {
 
 export default ContactForm;
 
-// ContactForm.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
+ContactForm.propTypes = {
+  formSubmitHandler: PropTypes.func.isRequired,
+};

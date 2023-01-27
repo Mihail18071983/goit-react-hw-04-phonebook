@@ -27,7 +27,7 @@ Contact.defaultProps = {
 
 Contact.propTypes = {
   name: PropTypes.string,
-  number: PropTypes.string.isRequired,
+  number: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };

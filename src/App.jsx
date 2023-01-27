@@ -7,11 +7,11 @@ import StyledBookTitle from 'modules/Contact/PhoneBookTitle.styled';
 import ContactTitle from 'modules/Contact/ContactTitle.styled';
 import ContactContainer from 'modules/Contact/СontactsContainer.styled';
 
-import initContacts from 'data/contacts';
+// import initContacts from 'data/contacts';
 
 export class App extends Component {
   state = {
-    contacts: [...initContacts],
+    contacts: [],
     filter: '',
   };
 
@@ -71,7 +71,7 @@ export class App extends Component {
     return (
       <>
         <StyledBookTitle>Phonebook</StyledBookTitle>
-        <ContactForm onChange={this.formSubmitHandler} />
+        <ContactForm formSubmitHandler={this.formSubmitHandler} />
         <ContactContainer>
           <ContactTitle>Contacts</ContactTitle>
           <Filter value={filter} onChange={this.changeFilter} />
